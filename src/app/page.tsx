@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { dbIndex } from "@/lib/db/pinecone";
+import prisma from "@/lib/db/prisma";
 
 export default function Home() {
   return (
@@ -22,31 +23,48 @@ export default function Home() {
   );
 }
 /*
-async function generateEmbedding() {
+async function POSTMONGO() { 
+    try {
+
+        const info = await prisma.info.create({
+            data: {
+                title: "Phone Number",
+                content: "646-581-8829",
+            }
+        });
+
+        return Response.json(info, { status: 200 })
+
+    } catch(error) {
+        console.error(error);
+            return Response.json({ error: "Internal server error" } , { status: 500 });
+    }
+}
+
+POSTMONGO();
+
+async function generateEmbedding(id: string) {
   
     const embeddings = new OpenAIEmbeddings({
         apiKey: process.env.OPENAI_API_KEY,
         model: "text-embedding-ada-002",
+      
     });
 
     const vectors = await embeddings.embedDocuments([
-        "646-581-8829 | kim3434@purdue.edu | linkedin.com/in/taewookim8829 | github.com/TaewoooK",
-        "Education: Purdue University West Lafayette",
-        "IN: B. Sci. Computer Science, Minor: Management, Certificate: Entrepreneurship Aug. 2020 – May 2024",
-        "Current GPA: 3.51, Dean’s List",
-        "Coursework: OOP, Programming in C, Computer Architecture, Data Structures, Analysis of Algorithms, Systems Programming, OS, Database and Information Systems",
+        "What is your phone number? 646-581-8829",
     ]);
 
     console.log(vectors[0].length);
 
     await dbIndex.upsert([
         {
-          id: "myinformation",
+          id: id,
           values: vectors[0],
         }
     ])
     
 }
 
-generateEmbedding();
+generateEmbedding("6646767e8a2df4df47441aea");
 */

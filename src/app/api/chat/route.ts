@@ -1,12 +1,31 @@
 import { dbIndex } from "@/lib/db/pinecone";
 import { ChatOpenAI } from "@langchain/openai";
 import { LangChainAdapter, LangChainStream, OpenAIStream, StreamingTextResponse } from "ai";
-import { getEmbedding } from "@/lib/openai";
+import openai, { getEmbedding } from "@/lib/openai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import OpenAI from "openai";
 import { ChatCompletionMessage, ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 import { OpenAIEmbeddings } from "@langchain/openai";
+import prisma from "@/lib/db/prisma";
+
+export async function POSTMONGO() { 
+    try {
+
+        const info = await prisma.info.create({
+            data: {
+                title: "Phone Number",
+                content: "646-581-8829",
+            }
+        });
+
+        return Response.json(info, { status: 200 })
+
+    } catch(error) {
+        console.error(error);
+            return Response.json({ error: "Internal server error" } , { status: 500 });
+    }
+}
 
 export async function POST(req: Request) {
     try {
@@ -19,44 +38,43 @@ export async function POST(req: Request) {
 
         const vectorQueryRes = await dbIndex.query({
             vector: embedding,
-            topK: 4,
+            topK: 1,
         });
 
-        const currentMessageContent = messages[messages.length - 1].content;
-        const {stream, handlers} = LangChainStream();
+        const releventInfo = await prisma.info.findMany({
+            where: {
+                id: {
+                    in: vectorQueryRes.matches.map((match) => match.id),
+                }
+            }
+        })
 
-        const chatModel = new ChatOpenAI({
-            modelName: "gpt-3.5-turbo",
-            streaming: true,
-            callbacks: [handlers],
+        const prompt: ChatCompletionMessageParam = {
+            role: 'system',
+            content: "You are a chatbot for a personal portfolio website. You impersonate the website's owner. " +
+            "You should be able to answer questions about the owner's background, career, hobbies, etc. " +
+            "You should also be able to provide contact information and links to the owner's social media profiles. " +
+            "You should be able to provide information about the owner's projects and skills. " +
+            "You should be able to provide information about the owner's education and work experience. " +
+            "You should be able to provide information about the owner's interests and hobbies. " +
+            "You should be able to provide information about the owner's goals and aspirations. " +
+            "You should be able to provide information about the owner's personality and character. " +
+            "Format your messages in markdown format.\n\n" + 
+            "The relevant information is as follows:\n" +
+            releventInfo.map((info) => 'question: ${info.question}\n\nanswer:\n${info.answer}').join("\n\n")
+        }
+
+        
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            stream: true,
+            messages: [prompt, ...messagesTrunc],
         });
 
-        const prompt = ChatPromptTemplate.fromMessages([
-            [
-                "system",
-                "You are a chatbot for a personal portfolio website. You impersonate the website's owner. " +
-                "You should be able to answer questions about the owner's background, career, hobbies, etc. " +
-                "You should also be able to provide contact information and links to the owner's social media profiles. " +
-                "You should be able to provide information about the owner's projects and skills. " +
-                "You should be able to provide information about the owner's education and work experience. " +
-                "You should be able to provide information about the owner's interests and hobbies. " +
-                "You should be able to provide information about the owner's goals and aspirations. " +
-                "You should be able to provide information about the owner's personality and character. " +
-                "Format your messages in markdown format.\n\n" + 
-                "Context:\n{context}"
-            ],
-            [
-                "user",
-                "{input}"
-            ],
-        ]);
+        console.log(prompt)
 
-        const chain = prompt.pipe(chatModel);
 
-        chain.invoke({
-            input: currentMessageContent,
-        });
-
+        const stream = OpenAIStream(response);
         return new StreamingTextResponse(stream);
 
     } catch (error) {

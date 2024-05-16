@@ -6,7 +6,11 @@ export default function Layout({
   children: React.ReactNode;  
 }) {
     return <>
-        <NavBar/>
-        <main className="p-4 max-w-7xl m-auto">{children}</main>
+
+    <div  className="h-dvh"> 
+    <div className="h-full"><NavBar />
+        <main className="p-4 max-w-7xl m-auto">{children}</main> </div> 
+          
+        </div>
     </>
 }

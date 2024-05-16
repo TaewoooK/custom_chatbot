@@ -8,4 +8,4 @@ if (!apiKey) {
 
 const pinecone = new Pinecone({apiKey});
 
-export const dbIndex = pinecone.Index("taebot");
+export const dbIndex = pinecone.index("taebot");

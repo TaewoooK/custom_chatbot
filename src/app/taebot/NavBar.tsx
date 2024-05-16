@@ -4,7 +4,9 @@ import logo from "@/app/assets/logo.png"
 import { Button } from "@/components/ui/button";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 
+
 export default function NavBar() {
+
     return ( 
         <div className="p-4 shadow">
             <div className="flex flex-wrap gap-3 items-center justify-between">

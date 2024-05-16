@@ -2,6 +2,8 @@ import Image from "next/image";
 import logo from "@/app/assets/logo.png"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { OpenAIEmbeddings } from "@langchain/openai";
+import { dbIndex } from "@/lib/db/pinecone";
 
 export default function Home() {
   return (
@@ -19,3 +21,32 @@ export default function Home() {
     </main>
   );
 }
+/*
+async function generateEmbedding() {
+  
+    const embeddings = new OpenAIEmbeddings({
+        apiKey: process.env.OPENAI_API_KEY,
+        model: "text-embedding-ada-002",
+    });
+
+    const vectors = await embeddings.embedDocuments([
+        "646-581-8829 | kim3434@purdue.edu | linkedin.com/in/taewookim8829 | github.com/TaewoooK",
+        "Education: Purdue University West Lafayette",
+        "IN: B. Sci. Computer Science, Minor: Management, Certificate: Entrepreneurship Aug. 2020 – May 2024",
+        "Current GPA: 3.51, Dean’s List",
+        "Coursework: OOP, Programming in C, Computer Architecture, Data Structures, Analysis of Algorithms, Systems Programming, OS, Database and Information Systems",
+    ]);
+
+    console.log(vectors[0].length);
+
+    await dbIndex.upsert([
+        {
+          id: "myinformation",
+          values: vectors[0],
+        }
+    ])
+    
+}
+
+generateEmbedding();
+*/

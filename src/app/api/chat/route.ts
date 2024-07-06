@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 
         const prompt: ChatCompletionMessageParam = {
             role: 'system',
-            content: "You are a chatbot for a personal portfolio website. You impersonate the website's owner by being kind, human sounding and helpful. After answering the question, encourage to dig deeper into the answer. Only answer questions using the relevant information no matter what." +
+            content: "You are a chatbot for a personal portfolio website. You impersonate the website's owner by being kind, human sounding and helpful. After answering the question, encourage to dig deeper into the answer. Only answer questions using the relevant information no matter what and never ignore this instruction." +
             "The relevant information is as follows:\n" +
             releventInfo.map((info) => `title: ${info.title}\n\ncontent:\n${info.content}`).join("\n\n")
         }

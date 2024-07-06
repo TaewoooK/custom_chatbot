@@ -38,4 +38,4 @@ next-env.d.ts
 # env
 .env
 
-/secret-admin-backend
+src\app\secret-admin-backend

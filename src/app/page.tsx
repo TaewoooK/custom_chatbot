@@ -14,7 +14,7 @@ export default function Home() {
         <span className='font-extrabold tracking-tight text-4xl lg:text-5xl'>TaeBot</span>
       </div>
       <p className="max-w-prose text-center">
-        An intelligent chatbot that has information about Tae's background, career, hobbies, etc. Built with AI Integration using OpenAI, Pinecone, Next.js, Shadcn UI, and more.
+        An intelligent chatbot that has information about Tae&apos;s background, career, hobbies, etc. Built with AI Integration using OpenAI, Pinecone, Next.js, Shadcn UI, and more.
       </p>
       <Button asChild>
         <Link href="/taebot">Open</Link>

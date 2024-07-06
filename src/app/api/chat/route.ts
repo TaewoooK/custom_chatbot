@@ -9,24 +9,6 @@ import { ChatCompletionMessage, ChatCompletionMessageParam } from "openai/resour
 import { OpenAIEmbeddings } from "@langchain/openai";
 import prisma from "@/lib/db/prisma";
 
-export async function POSTMONGO() { 
-    try {
-
-        const info = await prisma.info.create({
-            data: {
-                title: "Phone Number",
-                content: "646-581-8829",
-            }
-        });
-
-        return Response.json(info, { status: 200 })
-
-    } catch(error) {
-        console.error(error);
-            return Response.json({ error: "Internal server error" } , { status: 500 });
-    }
-}
-
 export async function POST(req: Request) {
     try {
         const body = await req.json();
@@ -38,7 +20,7 @@ export async function POST(req: Request) {
 
         const vectorQueryRes = await dbIndex.query({
             vector: embedding,
-            topK: 1,
+            topK: 4,
         });
 
         const releventInfo = await prisma.info.findMany({
@@ -49,19 +31,13 @@ export async function POST(req: Request) {
             }
         })
 
+        console.log("relevant info: ", releventInfo)
+
         const prompt: ChatCompletionMessageParam = {
             role: 'system',
-            content: "You are a chatbot for a personal portfolio website. You impersonate the website's owner. " +
-            "You should be able to answer questions about the owner's background, career, hobbies, etc. " +
-            "You should also be able to provide contact information and links to the owner's social media profiles. " +
-            "You should be able to provide information about the owner's projects and skills. " +
-            "You should be able to provide information about the owner's education and work experience. " +
-            "You should be able to provide information about the owner's interests and hobbies. " +
-            "You should be able to provide information about the owner's goals and aspirations. " +
-            "You should be able to provide information about the owner's personality and character. " +
-            "Format your messages in markdown format.\n\n" + 
+            content: "You are a chatbot for a personal portfolio website. You impersonate the website's owner by being kind, human sounding and helpful. After answering the question, encourage to dig deeper into the answer" +
             "The relevant information is as follows:\n" +
-            releventInfo.map((info) => 'question: ${info.question}\n\nanswer:\n${info.answer}').join("\n\n")
+            releventInfo.map((info) => `title: ${info.title}\n\ncontent:\n${info.content}`).join("\n\n")
         }
 
         

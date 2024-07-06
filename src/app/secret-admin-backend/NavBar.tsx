@@ -6,12 +6,12 @@ import logo from "@/app/assets/logo.png"
 import { Button } from "@/components/ui/button";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useState } from "react";
-import AddNoteDialog from "../components/AddNoteDialog";
+import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import { Plus } from "lucide-react";
 
 
 export default function NavBar() {
-    const [showAddNoteDialog, setShowAddNoteDialog] = useState(false);
+    const [showAddEditNoteDialog, setShowAddEditNoteDialog] = useState(false);
 
     return ( 
         <>
@@ -23,14 +23,14 @@ export default function NavBar() {
                 </Link>
                 <div className="flex items-center gap-2">
                     <ThemeToggleButton />
-                    <Button onClick={() => setShowAddNoteDialog(true)}>
+                    <Button onClick={() => setShowAddEditNoteDialog(true)}>
                         <Plus size={20} className="mr=2" />
                         Add Note    
                     </Button>
                 </div>
             </div>
         </div>
-            <AddNoteDialog open={showAddNoteDialog} setOpen={setShowAddNoteDialog} />
+            <AddEditNoteDialog open={showAddEditNoteDialog} setOpen={setShowAddEditNoteDialog} />
         </>
     );
 }

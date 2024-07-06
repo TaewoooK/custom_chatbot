@@ -9,9 +9,7 @@ import { ChatCompletionMessage, ChatCompletionMessageParam } from "openai/resour
 import { OpenAIEmbeddings } from "@langchain/openai";
 import prisma from "@/lib/db/prisma";
 
-export const config = {
-  maxDuration: 60,
-};
+export const maxDuration = 60
 
 export async function POST(req: Request) {
     try {

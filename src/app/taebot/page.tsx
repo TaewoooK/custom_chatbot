@@ -82,7 +82,7 @@ export default function ChatPage() {
                   )
                 }
               >
-                Reference Tae's Resume
+                Reference Tae&apos;s Resume
               </Button>
             </div>
           )}

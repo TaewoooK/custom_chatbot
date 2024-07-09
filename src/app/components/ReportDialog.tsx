@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
+import { Toaster } from "@/components/ui/sonner";
 import { Textarea } from "@/components/ui/textarea";
 import {
   CreateReportSchema,
@@ -23,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface ReportDialogProps {
   open: boolean;
@@ -50,6 +52,10 @@ export default function ReportDialog({ open, setOpen }: ReportDialogProps) {
       if (!response.ok) {
         throw new Error("Failed to send the report" + response.status);
       }
+
+      toast.success("Thank you for submitting your report!", {
+        description: "We appreciate all of your feedback!",
+      });
 
       form.reset();
       router.refresh();
@@ -106,6 +112,7 @@ export default function ReportDialog({ open, setOpen }: ReportDialogProps) {
           </form>
         </Form>
       </DialogContent>
+      <Toaster />
     </Dialog>
   );
 }

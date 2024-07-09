@@ -8,6 +8,7 @@ import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import ReportDialog from "../components/ReportDialog";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function NavBar() {
   const [showReportDialog, setShowReportDialog] = useState(false);

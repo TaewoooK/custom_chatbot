@@ -22,3 +22,14 @@ model Info {
 
   @@map("infos")
 }
+
+model Report {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reports")
+}

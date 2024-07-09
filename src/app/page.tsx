@@ -45,8 +45,17 @@ export default function Home() {
               </a>
             </li>
             <li>
-              <a href="/taebot" className="hover:underline">
+              <a href="/taebot" className="me-4 hover:underline md:me-6">
                 Contact
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://buymeacoffee.com/eddiekim11f"
+                className="me-4 hover:underline md:me-6"
+                target="_blank"
+              >
+                Developer Help
               </a>
             </li>
           </ul>

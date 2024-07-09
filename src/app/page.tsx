@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/app/assets/logo.png"
+import logo from "@/app/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { OpenAIEmbeddings } from "@langchain/openai";
@@ -8,17 +8,50 @@ import prisma from "@/lib/db/prisma";
 
 export default function Home() {
   return (
-    <main className='flex flex-col h-screen items-center justify-center gap-5'>
-      <div className='flex items-center gap-4'>
-        <Image src={logo} alt='TaeBot logo' width={100} height={100} />
-        <span className='font-extrabold tracking-tight text-4xl lg:text-5xl'>TaeBot</span>
-      </div>
-      <p className="max-w-prose text-center">
-        An intelligent chatbot that has information about Tae&apos;s background, career, hobbies, etc. Built with AI Integration using OpenAI, Pinecone, Next.js, Shadcn UI, and more.
-      </p>
-      <Button asChild>
-        <Link href="/taebot">Open</Link>
-      </Button>
-    </main>
+    <div className="flex h-screen flex-col">
+      <main className="flex flex-grow flex-col items-center justify-center gap-5">
+        <div className="flex items-center gap-4">
+          <Image src={logo} alt="TaeBot logo" width={100} height={100} />
+          <span className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+            TaeBot
+          </span>
+        </div>
+        <p className="max-w-prose text-center">
+          An intelligent chatbot that has information about Tae&apos;s
+          background, career, hobbies, etc. Built with AI Integration using
+          OpenAI, Pinecone, Next.js, Shadcn UI, and more.
+        </p>
+        <Button asChild>
+          <Link href="/taebot">Open</Link>
+        </Button>
+      </main>
+      <footer className="m-4 rounded-lg bg-white shadow dark:bg-gray-800">
+        <div className="mx-auto w-full max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+            © 2024{" "}
+            <a
+              href="https://www.linkedin.com/in/taewookim8829/"
+              className="hover:underline"
+              target="_blank"
+            >
+              Tae Woo Kim
+            </a>
+            . All Rights Reserved.
+          </span>
+          <ul className="mt-3 flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+              <a href="/taebot" className="me-4 hover:underline md:me-6">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="/taebot" className="hover:underline">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
   );
 }

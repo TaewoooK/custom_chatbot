@@ -75,15 +75,6 @@ export default function ChatPage() {
                 the relevant information.
               </p>
               <p className="text-sm text-muted-foreground">*beta*</p>
-              <Button
-                onClick={() =>
-                  openNewTab(
-                    "https://media.licdn.com/dms/document/media/D4E2DAQHB0lr6ZXUjoQ/profile-treasury-document-pdf-analyzed/0/1715965219060?e=1721260800&v=beta&t=roTArZhpngewlqH9UVtAQQmzYqoqQTgYmc-AWGdd1tg",
-                  )
-                }
-              >
-                Reference Tae&apos;s Resume
-              </Button>
             </div>
           )}
         </div>
@@ -112,6 +103,15 @@ export default function ChatPage() {
             <SendHorizonal size={24} />
           </button>
         </form>
+      </div>
+      <div className="fixed bottom-0 right-0 mb-4 mr-4">
+        <button
+          type="button"
+          onClick={() => openNewTab("https://buymeacoffee.com/eddiekim11f")}
+          className="rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 px-8 py-4 text-center text-lg font-medium text-white shadow-lg shadow-purple-500/50 hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-purple-300 dark:shadow-lg dark:shadow-purple-800/80 dark:focus:ring-purple-800"
+        >
+          What&apos;s this?
+        </button>
       </div>
     </div>
   );

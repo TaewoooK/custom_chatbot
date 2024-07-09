@@ -35,7 +35,7 @@ export default function NavBar() {
                 )
               }
             >
-              Resume
+              Reference Tae&apos;s Resume
             </Button>
           </div>
         </div>

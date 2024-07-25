@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     const vectorQueryRes = await dbIndex.query({
       vector: embedding,
-      topK: 4,
+      topK: 2,
     });
 
     const releventInfo = await prisma.info.findMany({

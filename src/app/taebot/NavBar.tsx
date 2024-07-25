@@ -31,7 +31,7 @@ export default function NavBar() {
             <Button
               onClick={() =>
                 openNewTab(
-                  "https://media.licdn.com/dms/document/media/D4E2DAQHB0lr6ZXUjoQ/profile-treasury-document-pdf-analyzed/0/1715965219060?e=1721260800&v=beta&t=roTArZhpngewlqH9UVtAQQmzYqoqQTgYmc-AWGdd1tg",
+                  "https://drive.google.com/file/d/1fX3DpoQt-TyVnpLstdx3-SMca8T-u1lg/view?usp=sharing",
                 )
               }
             >

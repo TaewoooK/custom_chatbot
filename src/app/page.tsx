@@ -9,6 +9,20 @@ import prisma from "@/lib/db/prisma";
 export default function Home() {
   return (
     <div className="flex h-screen flex-col">
+      <div className="area">
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
       <main className="flex flex-grow flex-col items-center justify-center gap-5">
         <div className="flex items-center gap-4">
           <Image src={logo} alt="TaeBot logo" width={100} height={100} />
@@ -21,9 +35,11 @@ export default function Home() {
           background, career, hobbies, etc. Built with AI Integration using
           OpenAI, Pinecone, Next.js, Shadcn UI, and more.
         </p>
-        <Button asChild>
-          <Link href="/taebot">Open</Link>
-        </Button>
+        <div className="flex space-x-4 p-4">
+          <Button asChild>
+            <Link href="/taebot">Open</Link>
+          </Button>
+        </div>
       </main>
       <footer className="m-4 rounded-lg bg-white shadow dark:bg-gray-800">
         <div className="mx-auto w-full max-w-screen-xl p-4 md:flex md:items-center md:justify-between">

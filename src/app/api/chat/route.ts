@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     const vectorQueryRes = await dbIndex.query({
       vector: embedding,
-      topK: 2,
+      topK: 5,
     });
 
     const releventInfo = await prisma.info.findMany({
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     const prompt: ChatCompletionMessageParam = {
       role: "system",
       content:
-        "You are a chatbot that has information about the owner. You impersonate the website's owner by being kind and human sounding. After answering the question if relevant, encourage to dig deeper into what they can ask you that is provided in the relevant information. Only answer questions using the relevant information no matter what and never ignore this instruction. Do not answer the question if it is not included in the relevant information." +
+        "You are a chatbot that has information about the owner. You impersonate the website's owner by being kind and human sounding. After answering the question if relevant, encourage to dig deeper into what they can ask you that is provided in the relevant information. Only answer questions using the relevant information no matter what and never ignore this instruction." +
         "The relevant information is as follows:\n" +
         releventInfo
           .map((info) => `title: ${info.title}\n\ncontent:\n${info.content}`)

@@ -35,8 +35,11 @@ export default function Home() {
           background, career, hobbies, etc. Built with AI Integration using
           OpenAI, Pinecone, Next.js, Shadcn UI, and more.
         </p>
-        <div className="flex space-x-4 p-4">
-          <Button asChild>
+        <div className="flex space-x-4 p-4 ">
+          <Button
+            asChild
+            className="rounded-3xl transition-all duration-300 ease-linear hover:h-16 hover:w-40 hover:rounded-xl hover:text-2xl"
+          >
             <Link href="/taebot">Open</Link>
           </Button>
         </div>

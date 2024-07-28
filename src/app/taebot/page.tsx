@@ -7,6 +7,7 @@ import { Message, useChat } from "ai/react";
 import { Bot, SendHorizonal, Trash } from "lucide-react";
 import { useEffect, useRef } from "react";
 import logo from "@/app/assets/logo.png";
+import SideBar from "./SideBar";
 
 export default function ChatPage() {
   const {
@@ -41,8 +42,8 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="h-[87vh] w-full p-1">
-      <div className="flex h-full flex-col rounded border bg-background shadow-xl">
+    <div className="flex h-[87vh] w-full p-1">
+      <div className="flex h-full w-full flex-col rounded border bg-background align-middle shadow-xl">
         <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
@@ -102,7 +103,6 @@ export default function ChatPage() {
           >
             <SendHorizonal size={24} />
           </button>
-          
         </form>
       </div>
     </div>
